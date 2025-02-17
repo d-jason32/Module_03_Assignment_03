@@ -30,12 +30,12 @@ public class AppController {
                 break;
             case RIGHT:
                 movingImage.setX(movingImage.getX() + JUMP);
-                movingImage1.setX(movingImage1.getY() + JUMP);
+                movingImage1.setX(movingImage1.getX() + JUMP);
 
                 break;
             case LEFT:
                 movingImage.setX(movingImage.getX() - JUMP);
-                movingImage1.setX(movingImage1.getY() - JUMP);
+                movingImage1.setX(movingImage1.getX() - JUMP);
 
                 break;
             default:

@@ -34,7 +34,6 @@ public class App extends Application
             }
         });
 
-        scene.setOnKeyPressed(controller::processKeyPress);
 
 
 
