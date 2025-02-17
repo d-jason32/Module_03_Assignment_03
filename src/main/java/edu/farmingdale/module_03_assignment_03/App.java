@@ -14,48 +14,36 @@ import javafx.scene.image.ImageView;
 
 public class App extends Application
 {
-    public final static int JUMP = 10;
-    @FXML
-    private ImageView robotImage;
+
 
     public void start(Stage primaryStage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1100, 800);
 
-        App controller = fxmlLoader.getController();
-        scene.setOnKeyPressed(controller::processKeyPress);
 
-
+        AppController controller = fxmlLoader.getController();
 
         primaryStage.setTitle("Robot");
         primaryStage.setScene(scene);
         primaryStage.show();
+
+        scene.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode().isArrowKey()) {
+                event.consume();
+                controller.processKeyPress(event);
+            }
+        });
+
+        scene.setOnKeyPressed(controller::processKeyPress);
+
+
 
     }
     public static void main(String[] args) {
         launch();
     }
 
-    public void processKeyPress(KeyEvent event)
-    {
-        switch (event.getCode())
-        {
-            case UP:
-                robotImage.setY(robotImage.getY() - JUMP);
-                break;
-            case DOWN:
-                robotImage.setY(robotImage.getY() + JUMP);
-                break;
-            case RIGHT:
-                robotImage.setX(robotImage.getX() + JUMP);
-                break;
-            case LEFT:
-                robotImage.setX(robotImage.getX() - JUMP);
-                break;
-            default:
-                break; // do nothing if it's not an arrow key
-        }
-    }
+
 
 }
 
