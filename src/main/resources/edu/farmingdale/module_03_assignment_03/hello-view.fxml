@@ -8,10 +8,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="656.0" prefWidth="1127.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.farmingdale.module_03_assignment_03.AppController">
-  <tabs>
-    <Tab text="Maze 1">
-      <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="426.0" prefWidth="611.0">
+   <tabs>
+      <Tab text="Maze 1">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="426.0" prefWidth="611.0">
                <children>
                   <ImageView fitHeight="620.0" fitWidth="921.0" layoutX="134.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -26,8 +26,8 @@
                   <Button fx:id="restart1" layoutX="42.0" layoutY="59.0" mnemonicParsing="false" text="Restart" />
                </children>
             </AnchorPane>
-      </content>
-    </Tab>
+         </content>
+      </Tab>
       <Tab text="Maze 2">
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="426.0" prefWidth="611.0">
@@ -46,5 +46,5 @@
             </AnchorPane>
          </content>
       </Tab>
-  </tabs>
+   </tabs>
 </TabPane>
