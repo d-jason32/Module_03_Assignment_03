@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.image.Image?>
@@ -22,6 +23,7 @@
                         <Image url="@robot.png" />
                      </image>
                   </ImageView>
+                  <Button fx:id="restart1" layoutX="42.0" layoutY="59.0" mnemonicParsing="false" text="Restart" />
                </children>
             </AnchorPane>
       </content>

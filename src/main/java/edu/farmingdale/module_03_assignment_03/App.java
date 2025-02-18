@@ -27,6 +27,7 @@ public class App extends Application
         primaryStage.setScene(scene);
         primaryStage.show();
 
+        // Stops arrow keys from switching tabs.
         scene.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getCode().isArrowKey()) {
                 event.consume();

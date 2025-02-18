@@ -1,6 +1,7 @@
 package edu.farmingdale.module_03_assignment_03;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 
@@ -11,8 +12,12 @@ public class AppController {
     private ImageView movingImage;
     @FXML
     private ImageView movingImage1;
+    @FXML
+    private Button restart1;
 
+    public void restart(){
 
+    }
     public void processKeyPress(KeyEvent event)
     {
         System.out.println("Key pressed: " + event.getCode());
