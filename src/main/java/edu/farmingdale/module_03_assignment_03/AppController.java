@@ -21,23 +21,35 @@ public class AppController {
             case UP:
                 movingImage.setY(movingImage.getY() - JUMP);
                 movingImage1.setY(movingImage1.getY() - JUMP);
-
+                // Face upwards (0 degrees rotation)
+                movingImage.setRotate(0);
+                movingImage1.setRotate(0);
                 break;
+
             case DOWN:
                 movingImage.setY(movingImage.getY() + JUMP);
                 movingImage1.setY(movingImage1.getY() + JUMP);
-
+                // Face downwards (180 degrees rotation)
+                movingImage.setRotate(180);
+                movingImage1.setRotate(180);
                 break;
+
             case RIGHT:
                 movingImage.setX(movingImage.getX() + JUMP);
                 movingImage1.setX(movingImage1.getX() + JUMP);
-
+                // Face right (90 degrees rotation)
+                movingImage.setRotate(90);
+                movingImage1.setRotate(90);
                 break;
+
             case LEFT:
                 movingImage.setX(movingImage.getX() - JUMP);
                 movingImage1.setX(movingImage1.getX() - JUMP);
-
+                // Face left (270 degrees rotation)
+                movingImage.setRotate(270);
+                movingImage1.setRotate(270);
                 break;
+
             default:
                 break; // do nothing if it's not an arrow key
         }
