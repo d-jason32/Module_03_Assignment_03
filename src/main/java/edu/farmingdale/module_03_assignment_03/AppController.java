@@ -7,17 +7,44 @@ import javafx.scene.input.KeyEvent;
 
 public class AppController {
 
-    public final static int JUMP = 10;
+    public final static int JUMP = 20;
     @FXML
-    private ImageView movingImage;
+    private Button autoCar1;
+
+    @FXML
+    private Button autoCar2;
+
+    @FXML
+    private Button autoRobot1;
+
+    @FXML
+    private Button autoRobot2;
+
+    @FXML
+    public ImageView movingImage;
+
     @FXML
     private ImageView movingImage1;
+
     @FXML
-    private Button restart1;
+    public Button restartButton1;
 
-    public void restart(){
+    @FXML
+    private Button restartButton2;
 
-    }
+    @FXML
+    private Button switchCar1;
+
+    @FXML
+    private Button switchCar2;
+
+    @FXML
+    private Button switchRobot1;
+
+    @FXML
+    private Button switchRobot2;
+
+
     public void processKeyPress(KeyEvent event)
     {
         System.out.println("Key pressed: " + event.getCode());
