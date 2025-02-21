@@ -18,7 +18,7 @@ public class App extends Application
 
     public void start(Stage primaryStage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1100, 800);
+        Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
 
 
         AppController controller = fxmlLoader.getController();
