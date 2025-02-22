@@ -14,3 +14,8 @@ Angel Adames
 Milton Moses
 
 Saim Sameer
+
+Pull Requests: 
+1. Obye Shaji (No pull request but he sent code as an email.)
+
+![img.png](img.png)

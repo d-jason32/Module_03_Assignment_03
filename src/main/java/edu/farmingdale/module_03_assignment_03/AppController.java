@@ -10,6 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.KeyCode;
+
 import javafx.util.Duration;
 
 public class AppController {
@@ -29,6 +30,7 @@ public class AppController {
 
     @FXML
     private Button restartButton1;
+
 
     @FXML
     private Button restartButton2;
@@ -316,6 +318,97 @@ public class AppController {
                                 adjustCarOrientationForMove(movingImage1, move);
                             } else {
                                 movingImage1.setScaleX(1);
+                            }
+                        }
+                    }
+            );
+            timeline.getKeyFrames().add(keyFrame);
+        }
+        timeline.play();
+    }
+
+    /**
+     * @author Obye Shaji
+     */
+    @FXML
+    public void autoRobot1() {
+        movingImage.setY(0);
+        movingImage.setX(0);
+
+        System.out.println("AutoSolve button pressed");
+        final String path = "RRUUUUUUUURRRRRRRRRRRRRRRRUUUURRRRDDDDDDDDDDDDDDDDRRRRUU" +
+                "UUUUUURRRRRRRRUUUUUUUURRRRRDDDDDDDDDDRRR";
+        Timeline timeline = new Timeline();
+        timeline.setCycleCount(1);
+        for (int i = 0; i < path.length(); i++) {
+            final int index = i;
+            KeyFrame keyFrame = new KeyFrame(
+                    Duration.millis(100 * (i + 1)),
+                    new EventHandler<ActionEvent>() {
+                        public void handle(ActionEvent e) {
+                            char move = path.charAt(index);
+                            System.out.println("Step " + (index + 1) + ": " + move);
+                            switch (move) {
+                                case 'R':
+                                    movingImage.setX(movingImage.getX() + JUMP);
+                                    break;
+                                case 'L':
+                                    movingImage.setX(movingImage.getX() - JUMP);
+                                    break;
+                                case 'U':
+                                    movingImage.setY(movingImage.getY() - JUMP);
+                                    break;
+                                case 'D':
+                                    movingImage.setY(movingImage.getY() + JUMP);
+                                    break;
+                                default:
+                                    System.out.println("Unknown move: " + move);
+                                    break;
+                            }
+                        }
+                    }
+            );
+            timeline.getKeyFrames().add(keyFrame);
+        }
+        timeline.play();
+
+    }
+    /**
+     * @author Obye Shaji
+     */
+    @FXML
+    public void autoRobot2() {
+        movingImage1.setY(0);
+        movingImage1.setX(0);
+        System.out.println("AutoSolve Maze 2 button pressed");
+        final String path = "DDDDDDDDDDDDDDDDDDDDDRRRRRRRRRRRRRUUUUUUUUUUUUURRRRRRRR" +
+                "RRRRUUUUUUUUUUURRRRRRRRRRDDDDDDDDDDDDDDDDDDDDDDDDD";
+        Timeline timeline = new Timeline();
+        timeline.setCycleCount(1);
+        for (int i = 0; i < path.length(); i++) {
+            final int index = i;
+            KeyFrame keyFrame = new KeyFrame(
+                    Duration.millis(100 * (i + 1)),
+                    new EventHandler<ActionEvent>() {
+                        public void handle(ActionEvent e) {
+                            char move = path.charAt(index);
+                            System.out.println("Maze 2 Step " + (index + 1) + ": " + move);
+                            switch (move) {
+                                case 'R':
+                                    movingImage1.setX(movingImage1.getX() + JUMP);
+                                    break;
+                                case 'L':
+                                    movingImage1.setX(movingImage1.getX() - JUMP);
+                                    break;
+                                case 'U':
+                                    movingImage1.setY(movingImage1.getY() - JUMP);
+                                    break;
+                                case 'D':
+                                    movingImage1.setY(movingImage1.getY() + JUMP);
+                                    break;
+                                default:
+                                    System.out.println("Unknown move: " + move);
+                                    break;
                             }
                         }
                     }
