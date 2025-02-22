@@ -1,48 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
 
 <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="656.0" prefWidth="1127.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.farmingdale.module_03_assignment_03.AppController">
-  <tabs>
-    <Tab text="Maze 1">
-      <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="426.0" prefWidth="611.0">
-               <children>
-                  <ImageView fitHeight="620.0" fitWidth="921.0" layoutX="134.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@maze.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="movingImage" fitHeight="26.0" fitWidth="23.0" layoutX="164.0" layoutY="392.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@robot.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </AnchorPane>
-      </content>
-    </Tab>
-      <Tab text="Maze 2">
-         <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="426.0" prefWidth="611.0">
-               <children>
-                  <ImageView fitHeight="620.0" fitWidth="921.0" layoutX="134.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@maze2.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="movingImage1" fitHeight="26.0" fitWidth="23.0" layoutX="189.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@robot.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </AnchorPane>
-         </content>
-      </Tab>
-  </tabs>
+    <tabs>
+        <Tab text="Maze 1">
+            <content>
+                <BorderPane>
+                    <center>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="426.0" prefWidth="611.0" BorderPane.alignment="CENTER">
+                            <children>
+                                <ImageView fitHeight="620.0" fitWidth="921.0" layoutX="134.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@maze.png" />
+                                    </image>
+                                </ImageView>
+                                <ImageView fx:id="movingImage" fitHeight="26.0" fitWidth="23.0" layoutX="164.0" layoutY="392.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@robot.png" />
+                                    </image>
+                                </ImageView>
+                            </children>
+                        </AnchorPane>
+                    </center>
+                    <left>
+                        <VBox prefHeight="625.0" prefWidth="113.0" BorderPane.alignment="CENTER">
+                            <children>
+                                <Button fx:id="restartButton1" mnemonicParsing="false" onAction="#restart1" text="Restart" />
+                                <Button fx:id="switchRobot1" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#switchRobot1" text="Switch to Robot" />
+                                <Button fx:id="switchCar1" layoutX="10.0" layoutY="36.0" mnemonicParsing="false" onAction="#switchCar1" text="Switch to Car" />
+                                <Button fx:id="autoRobotButton" mnemonicParsing="false" onAction="#autoRobot1" text="AutoSolve " />
+                            </children>
+                        </VBox>
+                    </left>
+                </BorderPane>
+            </content>
+        </Tab>
+        <Tab text="Maze 2">
+            <content>
+                <BorderPane>
+                    <center>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="426.0" prefWidth="611.0" BorderPane.alignment="CENTER">
+                            <children>
+                                <ImageView fitHeight="620.0" fitWidth="921.0" layoutX="134.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@maze2.png" />
+                                    </image>
+                                </ImageView>
+                                <ImageView fx:id="movingImage1" fitHeight="26.0" fitWidth="23.0" layoutX="183.0" layoutY="92.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@robot.png" />
+                                    </image>
+                                </ImageView>
+                            </children>
+                        </AnchorPane>
+                    </center>
+                    <left>
+                        <VBox prefHeight="625.0" prefWidth="113.0" BorderPane.alignment="CENTER">
+                            <children>
+                                <Button fx:id="restartButton2" mnemonicParsing="false" onAction="#restart2" text="Restart" />
+                                <Button fx:id="switchRobot2" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#switchRobot2" text="Switch to Robot" />
+                                <Button fx:id="switchCar2" layoutX="10.0" layoutY="36.0" mnemonicParsing="false" onAction="#switchCar2" text="Switch to Car" />
+                                <Button fx:id="autoRobot2" layoutX="10.0" layoutY="62.0" mnemonicParsing="false" onAction="#autoRobot2" prefHeight="32.0" prefWidth="113.0" text="AutoSolve " />
+                            </children>
+                        </VBox>
+                    </left>
+                </BorderPane>
+            </content>
+        </Tab>
+    </tabs>
 </TabPane>

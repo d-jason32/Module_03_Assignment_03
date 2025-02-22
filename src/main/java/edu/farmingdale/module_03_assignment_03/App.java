@@ -18,7 +18,7 @@ public class App extends Application
 
     public void start(Stage primaryStage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1100, 800);
+        Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
 
 
         AppController controller = fxmlLoader.getController();
@@ -27,6 +27,7 @@ public class App extends Application
         primaryStage.setScene(scene);
         primaryStage.show();
 
+        // Stops arrow keys from switching tabs.
         scene.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getCode().isArrowKey()) {
                 event.consume();
@@ -45,5 +46,3 @@ public class App extends Application
 
 
 }
-
-
