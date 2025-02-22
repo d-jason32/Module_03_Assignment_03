@@ -125,7 +125,7 @@ public class AppController {
     }
 
     /**
-     * Helper method to adjust the orientation for car moves in the timeline.
+     * Helper method to adjust the orientation for car moves.
      * The logic is similar to the key event adjustment.
      */
     private void adjustCarOrientationForMove(ImageView car, char move) {
