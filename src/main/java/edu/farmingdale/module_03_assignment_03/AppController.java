@@ -48,6 +48,10 @@ public class AppController {
     private Button switchRobot2;
 
     // Flags to track whether the current image is a car.
+    /**
+     * @author Saim Sammer
+     * @param event
+     */
     private boolean isCar1 = false;
     private boolean isCar2 = false;
 
@@ -61,7 +65,10 @@ public class AppController {
         movingImage1.setY(0);
         movingImage1.setX(0);
     }
-
+    /**
+     * @author Saim Sammer
+     * @param event
+     */
     // Switch methods for Maze 1
     @FXML
     void switchRobot1(ActionEvent event) {
@@ -70,15 +77,23 @@ public class AppController {
         // Ensure default orientation for robot.
         movingImage.setScaleX(1);
     }
-
+    /**
+     * @author Saim Sammer
+     * @param event
+     */
     @FXML
     void switchCar1(ActionEvent event) {
-        movingImage.setImage(new Image(getClass().getResourceAsStream("car.png")));
+        Car car = new Car();
+        movingImage.setImage(car.getImage());
         isCar1 = true;  // car mode
         // Ensure default (right-facing) orientation for car.
         movingImage.setScaleX(1);
     }
 
+    /**
+     * @author Saim Sammer
+     * @param event
+     */
     // Switch methods for Maze 2
     @FXML
     void switchRobot2(ActionEvent event) {
@@ -87,15 +102,21 @@ public class AppController {
         movingImage1.setScaleX(1);
     }
 
+    /**
+     * @Author Saim Sameer
+     * @param event
+     */
     @FXML
     void switchCar2(ActionEvent event) {
-        movingImage1.setImage(new Image(getClass().getResourceAsStream("car.png")));
+        Car car = new Car();
+        movingImage1.setImage(car.getImage());
         isCar2 = true;  // car mode
         movingImage1.setScaleX(1);
     }
 
     /**
      * Helper method to adjust the orientation for car key events.
+     * @author Saim Sameer
      * Since the car image naturally faces right:
      * - RIGHT: no change (scaleX = 1, rotation = 0)
      * - LEFT: mirror horizontally (scaleX = -1, rotation = 0)
@@ -155,6 +176,7 @@ public class AppController {
 
     /**
      * Process key presses.
+     * @author Jason Devaraj and Saim Sameer
      */
     public void processKeyPress(KeyEvent event)
     {
@@ -212,7 +234,7 @@ public class AppController {
 
     /**
      * Auto-solve Maze 1.
-     * Obye Shaji and Saim
+     * Obye Shaji and Saim Sameer
      */
     @FXML
     public void autoRobot1() {

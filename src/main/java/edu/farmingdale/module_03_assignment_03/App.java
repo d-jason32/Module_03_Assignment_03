@@ -33,9 +33,8 @@ public class App extends Application
                 event.consume();
                 controller.processKeyPress(event);
             }
-        });
-
-
+        }
+        );
 
 
     }
