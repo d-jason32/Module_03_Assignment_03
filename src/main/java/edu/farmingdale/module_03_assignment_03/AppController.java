@@ -5,17 +5,22 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.PixelReader;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.KeyCode;
 
+import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
 public class AppController {
 
-    public final static int JUMP = 20;
+    public final static int JUMP = 1;
     @FXML
     private Button autoRobot2;
 
@@ -27,6 +32,12 @@ public class AppController {
 
     @FXML
     private ImageView movingImage1;
+
+    @FXML
+    private ImageView maze1;
+
+    @FXML
+    private ImageView maze2;
 
     @FXML
     private Button restartButton1;
@@ -350,6 +361,83 @@ public class AppController {
             timeline.getKeyFrames().add(keyFrame);
         }
         timeline.play();
+    }
+
+    /**
+     * Robot Sensor.
+     * Milton Moses
+     */
+
+    public void getMaze1Collision()
+    {
+        Image maze1Image = maze1.getImage();
+        Canvas canvas = new Canvas(maze1.getFitWidth(), maze1.getFitHeight());
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        gc.drawImage(maze1Image, 0, 0, maze1.getFitWidth(), maze1.getFitHeight());
+        WritableImage resizedImage = new WritableImage((int) maze1.getFitWidth(), (int) maze1.getFitHeight());
+        canvas.snapshot(null, resizedImage);
+        PixelReader pixelReader = resizedImage.getPixelReader();
+
+        int x = (int) movingImage.getX() + 25;
+        int y = (int) movingImage.getY() + 382;
+        Color color;
+        if(movingImage.getRotate() == 90.0 || movingImage.getRotate() == 270.0) {
+            color = pixelReader.getColor(x, y + 5);
+            System.out.println("Detected color at Top left: " + (x) + ", " + (y + 5) + "  " + color.toString());
+            color = pixelReader.getColor(x, y + 20);
+            System.out.println("Detected color at Top Right: " + (x) + ", " + (y + 20) + "  " + color.toString());
+            color = pixelReader.getColor(x + 25, y + 5);
+            System.out.println("Detected color at Bottom left: " + (x + 25) + ", " + (y + 5) + "  " + color.toString());
+            color = pixelReader.getColor(x + 25, y + 20);
+            System.out.println("Detected color at Bottom Right: " + (x + 25) + ", " + (y + 20) + "  " + color.toString());
+        }
+        else if (movingImage.getRotate() == 0.0 || movingImage.getRotate() == 180.0) {
+            color = pixelReader.getColor(x + 5, y);
+            System.out.println("Detected color at Top left: " + (x + 5) + ", " + y + "  " + color.toString());
+            color = pixelReader.getColor(x + 20, y);
+            System.out.println("Detected color at Top Right: " + (x + 20) + ", " + y + "  " + color.toString());
+            color = pixelReader.getColor(x + 5, y + 25);
+            System.out.println("Detected color at Bottom left: " + (x + 5) + ", " + (y + 15) + "  " + color.toString());
+            color = pixelReader.getColor(x + 20, y + 25);
+            System.out.println("Detected color at Bottom Right: " + (x + 20) + ", " + (y + 15) + "  " + color.toString());
+        }
+        System.out.println(movingImage.getRotate());
+    }
+
+    public void getMaze2Collision()
+    {
+        Image maze1Image = maze2.getImage();
+        Canvas canvas = new Canvas(maze2.getFitWidth(), maze2.getFitHeight());
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        gc.drawImage(maze1Image, 0, 0, maze2.getFitWidth(), maze2.getFitHeight());
+        WritableImage resizedImage = new WritableImage((int) maze2.getFitWidth(), (int) maze2.getFitHeight());
+        canvas.snapshot(null, resizedImage);
+        PixelReader pixelReader = resizedImage.getPixelReader();
+
+        int x = (int) movingImage1.getX() + 35;
+        int y = (int) movingImage1.getY() + 385;
+        Color color;
+        if(movingImage1.getRotate() == 90 && movingImage1.getRotate() == 270) {
+
+            color = pixelReader.getColor(x, y + 5);
+            System.out.println("Detected color at Top left: " + (x) + ", " + (y + 5) + "  " + color.toString());
+            color = pixelReader.getColor(x, y + 20);
+            System.out.println("Detected color at Top Right: " + (x) + ", " + (y + 20) + "  " + color.toString());
+            color = pixelReader.getColor(x + 25, y + 5);
+            System.out.println("Detected color at Bottom left: " + (x + 25) + ", " + (y + 5) + "  " + color.toString());
+            color = pixelReader.getColor(x + 25, y + 20);
+            System.out.println("Detected color at Bottom Right: " + (x + 25) + ", " + (y + 20) + "  " + color.toString());
+        }
+        else {
+            color = pixelReader.getColor(x + 5, y);
+            System.out.println("Detected color at Top left: " + (x + 5) + ", " + y + "  " + color.toString());
+            color = pixelReader.getColor(x + 20, y);
+            System.out.println("Detected color at Top Right: " + (x + 20) + ", " + y + "  " + color.toString());
+            color = pixelReader.getColor(x + 5, y + 25);
+            System.out.println("Detected color at Bottom left: " + (x + 5) + ", " + (y + 25) + "  " + color.toString());
+            color = pixelReader.getColor(x + 20, y + 25);
+            System.out.println("Detected color at Bottom Right: " + (x + 20) + ", " + (y + 25) + "  " + color.toString());
+        }
     }
 
 
