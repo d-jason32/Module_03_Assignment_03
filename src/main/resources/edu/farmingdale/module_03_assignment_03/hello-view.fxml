@@ -34,8 +34,8 @@
                   <VBox prefHeight="625.0" prefWidth="113.0" BorderPane.alignment="CENTER">
                      <children>
                         <Button fx:id="restartButton1" mnemonicParsing="false" onAction="#restart1" text="Restart" />
-                        <Button fx:id="switchRobot1" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Switch to Robot" />
-                        <Button fx:id="switchCar1" layoutX="10.0" layoutY="36.0" mnemonicParsing="false" text="Switch to Car" />
+                        <Button fx:id="switchRobot1" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#switchRobot1" text="Switch to Robot" />
+                        <Button fx:id="switchCar1" layoutX="10.0" layoutY="36.0" mnemonicParsing="false" onAction="#switchCar1" text="Switch to Car" />
                         <Button fx:id="autoRobotButton" mnemonicParsing="false" onAction="#autoRobot1" text="AutoSolve " />
                      </children>
                   </VBox>
@@ -66,8 +66,8 @@
                   <VBox prefHeight="625.0" prefWidth="113.0" BorderPane.alignment="CENTER">
                      <children>
                         <Button fx:id="restartButton2" mnemonicParsing="false" onAction="#restart2" text="Restart" />
-                        <Button fx:id="switchRobot2" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Switch to Robot" />
-                        <Button fx:id="switchCar2" layoutX="10.0" layoutY="36.0" mnemonicParsing="false" text="Switch to Car" />
+                        <Button fx:id="switchRobot2" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#switchRobot2" text="Switch to Robot" />
+                        <Button fx:id="switchCar2" layoutX="10.0" layoutY="36.0" mnemonicParsing="false" onAction="#switchCar2" text="Switch to Car" />
                         <Button fx:id="autoRobot2" layoutX="10.0" layoutY="62.0" mnemonicParsing="false" onAction="#autoRobot2" prefHeight="32.0" prefWidth="113.0" text="AutoSolve " />
                      </children>
                   </VBox>
