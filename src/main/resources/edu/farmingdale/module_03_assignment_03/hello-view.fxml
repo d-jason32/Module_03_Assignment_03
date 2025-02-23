@@ -17,7 +17,7 @@
                <center>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="426.0" prefWidth="611.0" BorderPane.alignment="CENTER">
                      <children>
-                        <ImageView fitHeight="620.0" fitWidth="921.0" layoutX="134.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="maze1" fitHeight="620.0" fitWidth="921.0" layoutX="134.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@maze.png" />
                            </image>
@@ -49,7 +49,7 @@
                <center>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="426.0" prefWidth="611.0" BorderPane.alignment="CENTER">
                      <children>
-                        <ImageView fitHeight="620.0" fitWidth="921.0" layoutX="134.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="maze2" fitHeight="620.0" fitWidth="921.0" layoutX="134.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@maze2.png" />
                            </image>
