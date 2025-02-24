@@ -66,7 +66,17 @@ public class AppController {
     @FXML
     private Tab maze2Switch;
 
-    private int selectedMaze = 2;
+    private int selectedMaze;
+
+    @FXML
+    void enableBorder1(ActionEvent event) {
+        selectedMaze = 1;
+    }
+
+    @FXML
+    void enableBorder2(ActionEvent event) {
+        selectedMaze = 2;
+    }
 
     // Flags to track whether the current image is a car.
     /**
