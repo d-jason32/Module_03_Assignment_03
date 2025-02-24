@@ -32,8 +32,6 @@ public class App extends Application
             if (event.getCode().isArrowKey()) {
                 event.consume();
                 controller.processKeyPress(event);
-                controller.getMaze1Collision();
-
             }
         }
         );

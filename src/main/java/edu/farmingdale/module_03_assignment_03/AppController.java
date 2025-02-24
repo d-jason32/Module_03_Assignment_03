@@ -3,11 +3,13 @@ package edu.farmingdale.module_03_assignment_03;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.control.Tab;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelReader;
@@ -20,7 +22,7 @@ import javafx.util.Duration;
 
 public class AppController {
 
-    public final static int JUMP = 1;
+    public final static int JUMP = 20;
     @FXML
     private Button autoRobot2;
 
@@ -58,6 +60,14 @@ public class AppController {
     @FXML
     private Button switchRobot2;
 
+    @FXML
+    private Tab maze1Switch;
+
+    @FXML
+    private Tab maze2Switch;
+
+    private int selectedMaze = 2;
+
     // Flags to track whether the current image is a car.
     /**
      * @author Saim Sammer
@@ -65,6 +75,7 @@ public class AppController {
      */
     private boolean isCar1 = false;
     private boolean isCar2 = false;
+
 
     @FXML
     void restart1(ActionEvent event) {
@@ -87,6 +98,7 @@ public class AppController {
         isCar1 = false; // robot mode
         // Ensure default orientation for robot.
         movingImage.setScaleX(1);
+        selectedMaze = 1;
     }
     /**
      * @author Saim Sammer
@@ -111,6 +123,7 @@ public class AppController {
         movingImage1.setImage(new Image(getClass().getResourceAsStream("robot.png")));
         isCar2 = false; // robot mode
         movingImage1.setScaleX(1);
+        selectedMaze = 2;
     }
 
     /**
@@ -200,6 +213,7 @@ public class AppController {
                 // For robot, face upwards (0 degrees rotation)
                 movingImage.setRotate(0);
                 movingImage1.setRotate(0);
+
                 break;
 
             case DOWN:
@@ -208,6 +222,7 @@ public class AppController {
                 // For robot, face downwards (180 degrees rotation)
                 movingImage.setRotate(180);
                 movingImage1.setRotate(180);
+
                 break;
 
             case RIGHT:
@@ -216,6 +231,7 @@ public class AppController {
                 // For robot, face right (90 degrees rotation)
                 movingImage.setRotate(90);
                 movingImage1.setRotate(90);
+
                 break;
 
             case LEFT:
@@ -224,9 +240,18 @@ public class AppController {
                 // For robot, face left (270 degrees rotation)
                 movingImage.setRotate(270);
                 movingImage1.setRotate(270);
+
                 break;
             default:
                 break;
+        }
+        //Reverts Movement if sensor detects maze wall
+        if(selectedMaze == 1)
+        {
+            reverter(event, getMaze1Collision());
+        }
+        else if (selectedMaze == 2) {
+            reverter(event, getMaze2Collision());
         }
         // Apply separate orientation for car versus robot.
         if (isCar1) {
@@ -367,78 +392,162 @@ public class AppController {
      * Robot Sensor.
      * Milton Moses
      */
-
-    public void getMaze1Collision()
+    /**
+    This is the collision process for the 1st Maze
+     */
+    public boolean getMaze1Collision()
     {
+        /*
+        Processing the image so it matches the resolution size of the ImageView as the Pixel Reader class is not
+        compatible with the ImageView Class
+         */
+
         Image maze1Image = maze1.getImage();
-        Canvas canvas = new Canvas(maze1.getFitWidth(), maze1.getFitHeight());
+        Canvas canvas = new Canvas(879, 622);
         GraphicsContext gc = canvas.getGraphicsContext2D();
-        gc.drawImage(maze1Image, 0, 0, maze1.getFitWidth(), maze1.getFitHeight());
-        WritableImage resizedImage = new WritableImage((int) maze1.getFitWidth(), (int) maze1.getFitHeight());
+        gc.drawImage(maze1Image, 0, 0, 879, 622);
+        WritableImage resizedImage = new WritableImage((int) 879, (int) 622);
         canvas.snapshot(null, resizedImage);
         PixelReader pixelReader = resizedImage.getPixelReader();
-
-        int x = (int) movingImage.getX() + 25;
-        int y = (int) movingImage.getY() + 382;
-        Color color;
-        if(movingImage.getRotate() == 90.0 || movingImage.getRotate() == 270.0) {
-            color = pixelReader.getColor(x, y + 5);
-            System.out.println("Detected color at Top left: " + (x) + ", " + (y + 5) + "  " + color.toString());
-            color = pixelReader.getColor(x, y + 20);
-            System.out.println("Detected color at Top Right: " + (x) + ", " + (y + 20) + "  " + color.toString());
-            color = pixelReader.getColor(x + 25, y + 5);
-            System.out.println("Detected color at Bottom left: " + (x + 25) + ", " + (y + 5) + "  " + color.toString());
-            color = pixelReader.getColor(x + 25, y + 20);
-            System.out.println("Detected color at Bottom Right: " + (x + 25) + ", " + (y + 20) + "  " + color.toString());
+        /*
+        Calibrates the starting position of the robot with its position on the maze
+         */
+        int x = (int) movingImage.getX() + 31;
+        int y = (int) movingImage.getY() + 380;
+        //Initializes the Color Sensors
+        Color color1 = Color.WHITE;
+        Color color2 = Color.WHITE;
+        Color color3 = Color.WHITE;
+        Color color4 = Color.WHITE;
+        /*
+        Changes the position of the color sensors based on the orientation of the robot
+         */
+        if(movingImage1.getRotate() == 90 || movingImage1.getRotate() == 270) {
+            //debug
+            color1 = pixelReader.getColor(x, y + 5);
+            System.out.println("Detected color at Top left: " + (x) + ", " + (y + 5) + "  " + color1.toString());
+            color2 = pixelReader.getColor(x, y + 20);
+            System.out.println("Detected color at Bottom Left: " + (x) + ", " + (y + 20) + "  " + color2.toString());
+            color3 = pixelReader.getColor(x + 25, y + 5);
+            System.out.println("Detected color at Top Right: " + (x + 25) + ", " + (y + 5) + "  " + color3.toString());
+            color4 = pixelReader.getColor(x + 25, y + 20);
+            System.out.println("Detected color at Bottom Right: " + (x + 25) + ", " + (y + 20) + "  " + color4.toString());
         }
-        else if (movingImage.getRotate() == 0.0 || movingImage.getRotate() == 180.0) {
-            color = pixelReader.getColor(x + 5, y);
-            System.out.println("Detected color at Top left: " + (x + 5) + ", " + y + "  " + color.toString());
-            color = pixelReader.getColor(x + 20, y);
-            System.out.println("Detected color at Top Right: " + (x + 20) + ", " + y + "  " + color.toString());
-            color = pixelReader.getColor(x + 5, y + 25);
-            System.out.println("Detected color at Bottom left: " + (x + 5) + ", " + (y + 15) + "  " + color.toString());
-            color = pixelReader.getColor(x + 20, y + 25);
-            System.out.println("Detected color at Bottom Right: " + (x + 20) + ", " + (y + 15) + "  " + color.toString());
+        else if(movingImage1.getRotate() == 180 || movingImage1.getRotate() == 0)
+        {
+            //debug
+            color1 = pixelReader.getColor(x + 5, y);
+            System.out.println("Detected color at Top left: " + (x + 5) + ", " + y + "  " + color1.toString());
+            color2 = pixelReader.getColor(x + 20, y);
+            System.out.println("Detected color at Top Right: " + (x + 20) + ", " + y + "  " + color2.toString());
+            color3 = pixelReader.getColor(x + 5, y + 25);
+            System.out.println("Detected color at Bottom left: " + (x + 5) + ", " + (y + 25) + "  " + color3.toString());
+            color4 = pixelReader.getColor(x + 20, y + 25);
+            System.out.println("Detected color at Bottom Right: " + (x + 20) + ", " + (y + 25) + "  " + color4.toString());
         }
-        System.out.println(movingImage.getRotate());
+        //Returns a boolean Value based on if the 4 sensors are blue or not
+        return color1.toString().equals("0x005399ff") || color2.toString().equals("0x005399ff") || color3.toString().equals("0x005399ff") || color4.toString().equals("0x005399ff");
     }
 
-    public void getMaze2Collision()
+    /**
+     This is the collision process for the 2nd Maze
+     */
+    public boolean getMaze2Collision()
     {
+        /*
+        Processing the image so it matches the resolution size of the ImageView as the Pixel Reader class is not
+        compatible with the ImageView Class
+         */
         Image maze1Image = maze2.getImage();
-        Canvas canvas = new Canvas(maze2.getFitWidth(), maze2.getFitHeight());
+        Canvas canvas = new Canvas(828, 623);
         GraphicsContext gc = canvas.getGraphicsContext2D();
-        gc.drawImage(maze1Image, 0, 0, maze2.getFitWidth(), maze2.getFitHeight());
-        WritableImage resizedImage = new WritableImage((int) maze2.getFitWidth(), (int) maze2.getFitHeight());
+        gc.drawImage(maze1Image, 0, 0, 828, 623);
+        WritableImage resizedImage = new WritableImage(828, 623);
         canvas.snapshot(null, resizedImage);
         PixelReader pixelReader = resizedImage.getPixelReader();
+        /*
+        Calibrates the starting position of the robot with its position on the maze
+         */
+        int x = (int) movingImage1.getX() + 50;
+        int y = (int) movingImage1.getY() + 80;
+        //Creates the color sensors
+        Color color1 = Color.WHITE;
+        Color color2 = Color.WHITE;
+        Color color3 = Color.WHITE;
+        Color color4 = Color.WHITE;
+        /*
+        Changes the position of the color sensors based on the rotation of the robot
+         */
+        if(movingImage1.getRotate() == 90 || movingImage1.getRotate() == 270) {
 
-        int x = (int) movingImage1.getX() + 35;
-        int y = (int) movingImage1.getY() + 385;
-        Color color;
-        if(movingImage1.getRotate() == 90 && movingImage1.getRotate() == 270) {
+            color1 = pixelReader.getColor(x, y + 5);
+            System.out.println("Detected color at Top left: " + (x) + ", " + (y + 5) + "  " + color1.toString());
+            color2 = pixelReader.getColor(x, y + 20);
+            System.out.println("Detected color at Bottom Left: " + (x) + ", " + (y + 20) + "  " + color2.toString());
+            color3 = pixelReader.getColor(x + 25, y + 5);
+            System.out.println("Detected color at Top Right: " + (x + 25) + ", " + (y + 5) + "  " + color3.toString());
+            color4 = pixelReader.getColor(x + 25, y + 20);
+            System.out.println("Detected color at Bottom Right: " + (x + 25) + ", " + (y + 20) + "  " + color4.toString());
+        }
+        else if(movingImage1.getRotate() == 180 || movingImage1.getRotate() == 0)
+        {
+            color1 = pixelReader.getColor(x + 5, y);
+            System.out.println("Detected color at Top left: " + (x + 5) + ", " + y + "  " + color1.toString());
+            color2 = pixelReader.getColor(x + 20, y);
+            System.out.println("Detected color at Top Right: " + (x + 20) + ", " + y + "  " + color2.toString());
+            color3 = pixelReader.getColor(x + 5, y + 25);
+            System.out.println("Detected color at Bottom left: " + (x + 5) + ", " + (y + 25) + "  " + color3.toString());
+            color4 = pixelReader.getColor(x + 20, y + 25);
+            System.out.println("Detected color at Bottom Right: " + (x + 20) + ", " + (y + 25) + "  " + color4.toString());
+        }
 
-            color = pixelReader.getColor(x, y + 5);
-            System.out.println("Detected color at Top left: " + (x) + ", " + (y + 5) + "  " + color.toString());
-            color = pixelReader.getColor(x, y + 20);
-            System.out.println("Detected color at Top Right: " + (x) + ", " + (y + 20) + "  " + color.toString());
-            color = pixelReader.getColor(x + 25, y + 5);
-            System.out.println("Detected color at Bottom left: " + (x + 25) + ", " + (y + 5) + "  " + color.toString());
-            color = pixelReader.getColor(x + 25, y + 20);
-            System.out.println("Detected color at Bottom Right: " + (x + 25) + ", " + (y + 20) + "  " + color.toString());
-        }
-        else {
-            color = pixelReader.getColor(x + 5, y);
-            System.out.println("Detected color at Top left: " + (x + 5) + ", " + y + "  " + color.toString());
-            color = pixelReader.getColor(x + 20, y);
-            System.out.println("Detected color at Top Right: " + (x + 20) + ", " + y + "  " + color.toString());
-            color = pixelReader.getColor(x + 5, y + 25);
-            System.out.println("Detected color at Bottom left: " + (x + 5) + ", " + (y + 25) + "  " + color.toString());
-            color = pixelReader.getColor(x + 20, y + 25);
-            System.out.println("Detected color at Bottom Right: " + (x + 20) + ", " + (y + 25) + "  " + color.toString());
-        }
+        return color1.toString().equals("0x003fffff") || color2.toString().equals("0x003fffff") || color3.toString().equals("0x003fffff") || color4.toString().equals("0x003fffff");
     }
 
+    /**
+    This method reverts the position of the robot if it enters a position where the color sensors are triggered.
+    It is integrated into the processorKey method
+     */
+    public void reverter(KeyEvent event, boolean collisionCondition) {
+        KeyCode code = event.getCode();
+        if (collisionCondition) {
+            //Inverse of processKeyPress to revert movement
+            switch (event.getCode()) {
+                case UP:
+                    movingImage.setY(movingImage.getY() + JUMP);
+                    movingImage1.setY(movingImage1.getY() + JUMP);
+                    // For robot, face downwards (180 degrees rotation)
+                    movingImage.setRotate(0);
+                    movingImage1.setRotate(0);
+                    break;
+                case DOWN:
+                    movingImage.setY(movingImage.getY() - JUMP);
+                    movingImage1.setY(movingImage1.getY() - JUMP);
+                    // For robot, face upwards (0 degrees rotation)
+                    movingImage.setRotate(180);
+                    movingImage1.setRotate(180);
+                    break;
+
+                case RIGHT:
+                    movingImage.setX(movingImage.getX() - JUMP);
+                    movingImage1.setX(movingImage1.getX() - JUMP);
+                    // For robot, face left (270 degrees rotation)
+                    movingImage.setRotate(90);
+                    movingImage1.setRotate(90);
+                    break;
+
+                case LEFT:
+                    movingImage.setX(movingImage.getX() + JUMP);
+                    movingImage1.setX(movingImage1.getX() + JUMP);
+                    // For robot, face right (90 degrees rotation)
+                    movingImage.setRotate(270);
+                    movingImage1.setRotate(270);
+                    break;
+                default:
+                    break;
+            }
+            event.consume();
+        }
+    }
 
 }

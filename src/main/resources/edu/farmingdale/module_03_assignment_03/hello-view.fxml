@@ -11,7 +11,7 @@
 
 <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="656.0" prefWidth="1127.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.farmingdale.module_03_assignment_03.AppController">
    <tabs>
-      <Tab text="Maze 1">
+      <Tab fx:id="maze1Switch" text="Maze 1">
          <content>
             <BorderPane>
                <center>
@@ -43,7 +43,7 @@
             </BorderPane>
          </content>
       </Tab>
-      <Tab text="Maze 2">
+      <Tab fx:id="maze2Switch" text="Maze 2">
          <content>
             <BorderPane>
                <center>
