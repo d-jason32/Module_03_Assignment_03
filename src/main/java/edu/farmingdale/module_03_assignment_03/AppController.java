@@ -422,7 +422,7 @@ public class AppController {
         /*
         Changes the position of the color sensors based on the orientation of the robot
          */
-        if(movingImage1.getRotate() == 90 || movingImage1.getRotate() == 270) {
+        if(movingImage.getRotate() == 90 || movingImage.getRotate() == 270) {
             //debug
             color1 = pixelReader.getColor(x, y + 5);
             System.out.println("Detected color at Top left: " + (x) + ", " + (y + 5) + "  " + color1.toString());
@@ -433,7 +433,7 @@ public class AppController {
             color4 = pixelReader.getColor(x + 25, y + 20);
             System.out.println("Detected color at Bottom Right: " + (x + 25) + ", " + (y + 20) + "  " + color4.toString());
         }
-        else if(movingImage1.getRotate() == 180 || movingImage1.getRotate() == 0)
+        else if(movingImage.getRotate() == 180 || movingImage.getRotate() == 0)
         {
             //debug
             color1 = pixelReader.getColor(x + 5, y);
@@ -448,7 +448,7 @@ public class AppController {
         //Returns a boolean Value based on if the 4 sensors are blue or not
         return color1.toString().equals("0x005399ff") || color2.toString().equals("0x005399ff") || color3.toString().equals("0x005399ff") || color4.toString().equals("0x005399ff");
     }
-
+    //
     /**
      This is the collision process for the 2nd Maze
      */

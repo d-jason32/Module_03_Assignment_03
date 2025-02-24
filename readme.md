@@ -24,5 +24,6 @@ Pull Requests:
 
 ![img.png](img.png)
 
-2. Saim Sameer
-![img_1.png](img_1.png)
+2. Saim Sameer (See pull request)
+
+3. Milton Moses (See pull request)
