@@ -15,14 +15,14 @@ import javafx.scene.image.ImageView;
 public class App extends Application
 {
 
-
+    // creates new scene for Image
     public void start(Stage primaryStage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
 
-
         AppController controller = fxmlLoader.getController();
 
+        // sets title of new stage, and displays it
         primaryStage.setTitle("Robot");
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -38,6 +38,7 @@ public class App extends Application
 
 
     }
+
     public static void main(String[] args) {
         launch();
     }
