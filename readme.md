@@ -27,3 +27,5 @@ Pull Requests:
 2. Saim Sameer (See pull request)
 
 3. Milton Moses (See pull request)
+
+4. Angel Adames (See pull request)
